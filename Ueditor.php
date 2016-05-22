@@ -11,9 +11,9 @@ use yii\web\View;
 use yii\widgets\InputWidget;
 
 class Ueditor extends InputWidget {
-	// ÅäÖÃÑ¡Ïî£¬²ÎÔÄUeditor¹ÙÍøÎÄµµ(¶¨ÖÆ²Ëµ¥µÈ)
+	// é…ç½®é€‰é¡¹ï¼Œå‚é˜…Ueditorå®˜ç½‘æ–‡æ¡£(å®šåˆ¶èœå•ç­‰)
 	public $clientOptions = [ ];
-	// Ä¬ÈÏÅäÖÃ
+	// é»˜è®¤é…ç½®
 	protected $_options;
 	
 	public $name = 'ueditor';

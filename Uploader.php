@@ -3,50 +3,50 @@
 namespace h1cms\ueditor;
 
 class Uploader {
-	private $fileField; // ÎÄ¼şÓòÃû
-	private $file; // ÎÄ¼şÉÏ´«¶ÔÏó
-	private $base64; // ÎÄ¼şÉÏ´«¶ÔÏó
-	private $config; // ÅäÖÃĞÅÏ¢
-	private $oriName; // Ô­Ê¼ÎÄ¼şÃû
-	private $fileName; // ĞÂÎÄ¼şÃû
-	private $fullName; // ÍêÕûÎÄ¼şÃû,¼´´Óµ±Ç°ÅäÖÃÄ¿Â¼¿ªÊ¼µÄURL
-	private $filePath; // ÍêÕûÎÄ¼şÃû,¼´´Óµ±Ç°ÅäÖÃÄ¿Â¼¿ªÊ¼µÄURL
-	private $fileSize; // ÎÄ¼ş´óĞ¡
-	private $fileType; // ÎÄ¼şÀàĞÍ
-	private $stateInfo; // ÉÏ´«×´Ì¬ĞÅÏ¢,
-	private $stateMap = array ( // ÉÏ´«×´Ì¬Ó³Éä±í£¬¹ú¼Ê»¯ÓÃ»§Ğè¿¼ÂÇ´Ë´¦Êı¾İµÄ¹ú¼Ê»¯
-			"SUCCESS", // ÉÏ´«³É¹¦±ê¼Ç£¬ÔÚUEditorÖĞÄÚ²»¿É¸Ä±ä£¬·ñÔòflashÅĞ¶Ï»á³ö´í
-			"ÎÄ¼ş´óĞ¡³¬³ö upload_max_filesize ÏŞÖÆ",
-			"ÎÄ¼ş´óĞ¡³¬³ö MAX_FILE_SIZE ÏŞÖÆ",
-			"ÎÄ¼şÎ´±»ÍêÕûÉÏ´«",
-			"Ã»ÓĞÎÄ¼ş±»ÉÏ´«",
-			"ÉÏ´«ÎÄ¼şÎª¿Õ",
-			"ERROR_TMP_FILE" => "ÁÙÊ±ÎÄ¼ş´íÎó",
-			"ERROR_TMP_FILE_NOT_FOUND" => "ÕÒ²»µ½ÁÙÊ±ÎÄ¼ş",
-			"ERROR_SIZE_EXCEED" => "ÎÄ¼ş´óĞ¡³¬³öÍøÕ¾ÏŞÖÆ",
-			"ERROR_TYPE_NOT_ALLOWED" => "ÎÄ¼şÀàĞÍ²»ÔÊĞí",
-			"ERROR_CREATE_DIR" => "Ä¿Â¼´´½¨Ê§°Ü",
-			"ERROR_DIR_NOT_WRITEABLE" => "Ä¿Â¼Ã»ÓĞĞ´È¨ÏŞ",
-			"ERROR_FILE_MOVE" => "ÎÄ¼ş±£´æÊ±³ö´í",
-			"ERROR_FILE_NOT_FOUND" => "ÕÒ²»µ½ÉÏ´«ÎÄ¼ş",
-			"ERROR_WRITE_CONTENT" => "Ğ´ÈëÎÄ¼şÄÚÈİ´íÎó",
-			"ERROR_UNKNOWN" => "Î´Öª´íÎó",
-			"ERROR_DEAD_LINK" => "Á´½Ó²»¿ÉÓÃ",
-			"ERROR_HTTP_LINK" => "Á´½Ó²»ÊÇhttpÁ´½Ó",
-			"ERROR_HTTP_CONTENTTYPE" => "Á´½ÓcontentType²»ÕıÈ·",
-			"INVALID_URL" => "·Ç·¨ URL",
-			"INVALID_IP" => "·Ç·¨ IP" 
+	private $fileField; // æ–‡ä»¶åŸŸå
+	private $file; // æ–‡ä»¶ä¸Šä¼ å¯¹è±¡
+	private $base64; // æ–‡ä»¶ä¸Šä¼ å¯¹è±¡
+	private $config; // é…ç½®ä¿¡æ¯
+	private $oriName; // åŸå§‹æ–‡ä»¶å
+	private $fileName; // æ–°æ–‡ä»¶å
+	private $fullName; // å®Œæ•´æ–‡ä»¶å,å³ä»å½“å‰é…ç½®ç›®å½•å¼€å§‹çš„URL
+	private $filePath; // å®Œæ•´æ–‡ä»¶å,å³ä»å½“å‰é…ç½®ç›®å½•å¼€å§‹çš„URL
+	private $fileSize; // æ–‡ä»¶å¤§å°
+	private $fileType; // æ–‡ä»¶ç±»å‹
+	private $stateInfo; // ä¸Šä¼ çŠ¶æ€ä¿¡æ¯,
+	private $stateMap = array ( // ä¸Šä¼ çŠ¶æ€æ˜ å°„è¡¨ï¼Œå›½é™…åŒ–ç”¨æˆ·éœ€è€ƒè™‘æ­¤å¤„æ•°æ®çš„å›½é™…åŒ–
+			"SUCCESS", // ä¸Šä¼ æˆåŠŸæ ‡è®°ï¼Œåœ¨UEditorä¸­å†…ä¸å¯æ”¹å˜ï¼Œå¦åˆ™flashåˆ¤æ–­ä¼šå‡ºé”™
+			"æ–‡ä»¶å¤§å°è¶…å‡º upload_max_filesize é™åˆ¶",
+			"æ–‡ä»¶å¤§å°è¶…å‡º MAX_FILE_SIZE é™åˆ¶",
+			"æ–‡ä»¶æœªè¢«å®Œæ•´ä¸Šä¼ ",
+			"æ²¡æœ‰æ–‡ä»¶è¢«ä¸Šä¼ ",
+			"ä¸Šä¼ æ–‡ä»¶ä¸ºç©º",
+			"ERROR_TMP_FILE" => "ä¸´æ—¶æ–‡ä»¶é”™è¯¯",
+			"ERROR_TMP_FILE_NOT_FOUND" => "æ‰¾ä¸åˆ°ä¸´æ—¶æ–‡ä»¶",
+			"ERROR_SIZE_EXCEED" => "æ–‡ä»¶å¤§å°è¶…å‡ºç½‘ç«™é™åˆ¶",
+			"ERROR_TYPE_NOT_ALLOWED" => "æ–‡ä»¶ç±»å‹ä¸å…è®¸",
+			"ERROR_CREATE_DIR" => "ç›®å½•åˆ›å»ºå¤±è´¥",
+			"ERROR_DIR_NOT_WRITEABLE" => "ç›®å½•æ²¡æœ‰å†™æƒé™",
+			"ERROR_FILE_MOVE" => "æ–‡ä»¶ä¿å­˜æ—¶å‡ºé”™",
+			"ERROR_FILE_NOT_FOUND" => "æ‰¾ä¸åˆ°ä¸Šä¼ æ–‡ä»¶",
+			"ERROR_WRITE_CONTENT" => "å†™å…¥æ–‡ä»¶å†…å®¹é”™è¯¯",
+			"ERROR_UNKNOWN" => "æœªçŸ¥é”™è¯¯",
+			"ERROR_DEAD_LINK" => "é“¾æ¥ä¸å¯ç”¨",
+			"ERROR_HTTP_LINK" => "é“¾æ¥ä¸æ˜¯httpé“¾æ¥",
+			"ERROR_HTTP_CONTENTTYPE" => "é“¾æ¥contentTypeä¸æ­£ç¡®",
+			"INVALID_URL" => "éæ³• URL",
+			"INVALID_IP" => "éæ³• IP" 
 	);
 	
 	/**
-	 * ¹¹Ôìº¯Êı
+	 * æ„é€ å‡½æ•°
 	 *
 	 * @param string $fileField
-	 *        	±íµ¥Ãû³Æ
+	 *        	è¡¨å•åç§°
 	 * @param array $config
-	 *        	ÅäÖÃÏî
+	 *        	é…ç½®é¡¹
 	 * @param bool $base64
-	 *        	ÊÇ·ñ½âÎöbase64±àÂë£¬¿ÉÊ¡ÂÔ¡£Èô¿ªÆô£¬Ôò$fileField´ú±íµÄÊÇbase64±àÂëµÄ×Ö·û´®±íµ¥Ãû
+	 *        	æ˜¯å¦è§£æbase64ç¼–ç ï¼Œå¯çœç•¥ã€‚è‹¥å¼€å¯ï¼Œåˆ™$fileFieldä»£è¡¨çš„æ˜¯base64ç¼–ç çš„å­—ç¬¦ä¸²è¡¨å•å
 	 */
 	public function __construct($fileField, $config, $type = "upload") {
 		$this->fileField = $fileField;
@@ -60,11 +60,11 @@ class Uploader {
 			$this->upFile ();
 		}
 		
-		$this->stateMap ['ERROR_TYPE_NOT_ALLOWED'] = iconv ( 'unicode', 'utf-8', $this->stateMap ['ERROR_TYPE_NOT_ALLOWED'] );
+		$this->stateMap ['ERROR_TYPE_NOT_ALLOWED'] = $this->stateMap ['ERROR_TYPE_NOT_ALLOWED'];
 	}
 	
 	/**
-	 * ÉÏ´«ÎÄ¼şµÄÖ÷´¦Àí·½·¨
+	 * ä¸Šä¼ æ–‡ä»¶çš„ä¸»å¤„ç†æ–¹æ³•
 	 *
 	 * @return mixed
 	 */
@@ -93,19 +93,19 @@ class Uploader {
 		$this->fileName = $this->getFileName ();
 		$dirname = dirname ( $this->filePath );
 		
-		// ¼ì²éÎÄ¼ş´óĞ¡ÊÇ·ñ³¬³öÏŞÖÆ
+		// æ£€æŸ¥æ–‡ä»¶å¤§å°æ˜¯å¦è¶…å‡ºé™åˆ¶
 		if (! $this->checkSize ()) {
 			$this->stateInfo = $this->getStateInfo ( "ERROR_SIZE_EXCEED" );
 			return;
 		}
 		
-		// ¼ì²éÊÇ·ñ²»ÔÊĞíµÄÎÄ¼ş¸ñÊ½
+		// æ£€æŸ¥æ˜¯å¦ä¸å…è®¸çš„æ–‡ä»¶æ ¼å¼
 		if (! $this->checkType ()) {
 			$this->stateInfo = $this->getStateInfo ( "ERROR_TYPE_NOT_ALLOWED" );
 			return;
 		}
 		
-		// ´´½¨Ä¿Â¼Ê§°Ü
+		// åˆ›å»ºç›®å½•å¤±è´¥
 		if (! file_exists ( $dirname ) && ! mkdir ( $dirname, 0777, true )) {
 			$this->stateInfo = $this->getStateInfo ( "ERROR_CREATE_DIR" );
 			return;
@@ -114,16 +114,16 @@ class Uploader {
 			return;
 		}
 		
-		// ÒÆ¶¯ÎÄ¼ş
-		if (! (move_uploaded_file ( $file ["tmp_name"], $this->filePath ) && file_exists ( $this->filePath ))) { // ÒÆ¶¯Ê§°Ü
+		// ç§»åŠ¨æ–‡ä»¶
+		if (! (move_uploaded_file ( $file ["tmp_name"], $this->filePath ) && file_exists ( $this->filePath ))) { // ç§»åŠ¨å¤±è´¥
 			$this->stateInfo = $this->getStateInfo ( "ERROR_FILE_MOVE" );
-		} else { // ÒÆ¶¯³É¹¦
+		} else { // ç§»åŠ¨æˆåŠŸ
 			$this->stateInfo = $this->stateMap [0];
 		}
 	}
 	
 	/**
-	 * ´¦Àíbase64±àÂëµÄÍ¼Æ¬ÉÏ´«
+	 * å¤„ç†base64ç¼–ç çš„å›¾ç‰‡ä¸Šä¼ 
 	 *
 	 * @return mixed
 	 */
@@ -139,13 +139,13 @@ class Uploader {
 		$this->fileName = $this->getFileName ();
 		$dirname = dirname ( $this->filePath );
 		
-		// ¼ì²éÎÄ¼ş´óĞ¡ÊÇ·ñ³¬³öÏŞÖÆ
+		// æ£€æŸ¥æ–‡ä»¶å¤§å°æ˜¯å¦è¶…å‡ºé™åˆ¶
 		if (! $this->checkSize ()) {
 			$this->stateInfo = $this->getStateInfo ( "ERROR_SIZE_EXCEED" );
 			return;
 		}
 		
-		// ´´½¨Ä¿Â¼Ê§°Ü
+		// åˆ›å»ºç›®å½•å¤±è´¥
 		if (! file_exists ( $dirname ) && ! mkdir ( $dirname, 0777, true )) {
 			$this->stateInfo = $this->getStateInfo ( "ERROR_CREATE_DIR" );
 			return;
@@ -154,16 +154,16 @@ class Uploader {
 			return;
 		}
 		
-		// ÒÆ¶¯ÎÄ¼ş
-		if (! (file_put_contents ( $this->filePath, $img ) && file_exists ( $this->filePath ))) { // ÒÆ¶¯Ê§°Ü
+		// ç§»åŠ¨æ–‡ä»¶
+		if (! (file_put_contents ( $this->filePath, $img ) && file_exists ( $this->filePath ))) { // ç§»åŠ¨å¤±è´¥
 			$this->stateInfo = $this->getStateInfo ( "ERROR_WRITE_CONTENT" );
-		} else { // ÒÆ¶¯³É¹¦
+		} else { // ç§»åŠ¨æˆåŠŸ
 			$this->stateInfo = $this->stateMap [0];
 		}
 	}
 	
 	/**
-	 * À­È¡Ô¶³ÌÍ¼Æ¬
+	 * æ‹‰å–è¿œç¨‹å›¾ç‰‡
 	 *
 	 * @return mixed
 	 */
@@ -171,7 +171,7 @@ class Uploader {
 		$imgUrl = htmlspecialchars ( $this->fileField );
 		$imgUrl = str_replace ( "&amp;", "&", $imgUrl );
 		
-		// http¿ªÍ·ÑéÖ¤
+		// httpå¼€å¤´éªŒè¯
 		if (strpos ( $imgUrl, "http" ) !== 0) {
 			$this->stateInfo = $this->getStateInfo ( "ERROR_HTTP_LINK" );
 			return;
@@ -180,7 +180,7 @@ class Uploader {
 		preg_match ( '/(^https*:\/\/[^:\/]+)/', $imgUrl, $matches );
 		$host_with_protocol = count ( $matches ) > 1 ? $matches [1] : '';
 		
-		// ÅĞ¶ÏÊÇ·ñÊÇºÏ·¨ url
+		// åˆ¤æ–­æ˜¯å¦æ˜¯åˆæ³• url
 		if (! filter_var ( $host_with_protocol, FILTER_VALIDATE_URL )) {
 			$this->stateInfo = $this->getStateInfo ( "INVALID_URL" );
 			return;
@@ -189,28 +189,28 @@ class Uploader {
 		preg_match ( '/^https*:\/\/(.+)/', $host_with_protocol, $matches );
 		$host_without_protocol = count ( $matches ) > 1 ? $matches [1] : '';
 		
-		// ´ËÊ±ÌáÈ¡³öÀ´µÄ¿ÉÄÜÊÇ ip Ò²ÓĞ¿ÉÄÜÊÇÓòÃû£¬ÏÈ»ñÈ¡ ip
+		// æ­¤æ—¶æå–å‡ºæ¥çš„å¯èƒ½æ˜¯ ip ä¹Ÿæœ‰å¯èƒ½æ˜¯åŸŸåï¼Œå…ˆè·å– ip
 		$ip = gethostbyname ( $host_without_protocol );
-		// ÅĞ¶ÏÊÇ·ñÊÇË½ÓĞ ip
+		// åˆ¤æ–­æ˜¯å¦æ˜¯ç§æœ‰ ip
 		if (! filter_var ( $ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE )) {
 			$this->stateInfo = $this->getStateInfo ( "INVALID_IP" );
 			return;
 		}
 		
-		// »ñÈ¡ÇëÇóÍ·²¢¼ì²âËÀÁ´
+		// è·å–è¯·æ±‚å¤´å¹¶æ£€æµ‹æ­»é“¾
 		$heads = get_headers ( $imgUrl, 1 );
 		if (! (stristr ( $heads [0], "200" ) && stristr ( $heads [0], "OK" ))) {
 			$this->stateInfo = $this->getStateInfo ( "ERROR_DEAD_LINK" );
 			return;
 		}
-		// ¸ñÊ½ÑéÖ¤(À©Õ¹ÃûÑéÖ¤ºÍContent-TypeÑéÖ¤)
+		// æ ¼å¼éªŒè¯(æ‰©å±•åéªŒè¯å’ŒContent-TypeéªŒè¯)
 		$fileType = strtolower ( strrchr ( $imgUrl, '.' ) );
 		if (! in_array ( $fileType, $this->config ['allowFiles'] ) || ! isset ( $heads ['Content-Type'] ) || ! stristr ( $heads ['Content-Type'], "image" )) {
 			$this->stateInfo = $this->getStateInfo ( "ERROR_HTTP_CONTENTTYPE" );
 			return;
 		}
 		
-		// ´ò¿ªÊä³ö»º³åÇø²¢»ñÈ¡Ô¶³ÌÍ¼Æ¬
+		// æ‰“å¼€è¾“å‡ºç¼“å†²åŒºå¹¶è·å–è¿œç¨‹å›¾ç‰‡
 		ob_start ();
 		$context = stream_context_create ( array (
 				'http' => array (
@@ -232,13 +232,13 @@ class Uploader {
 		$this->fileName = $this->getFileName ();
 		$dirname = dirname ( $this->filePath );
 		
-		// ¼ì²éÎÄ¼ş´óĞ¡ÊÇ·ñ³¬³öÏŞÖÆ
+		// æ£€æŸ¥æ–‡ä»¶å¤§å°æ˜¯å¦è¶…å‡ºé™åˆ¶
 		if (! $this->checkSize ()) {
 			$this->stateInfo = $this->getStateInfo ( "ERROR_SIZE_EXCEED" );
 			return;
 		}
 		
-		// ´´½¨Ä¿Â¼Ê§°Ü
+		// åˆ›å»ºç›®å½•å¤±è´¥
 		if (! file_exists ( $dirname ) && ! mkdir ( $dirname, 0777, true )) {
 			$this->stateInfo = $this->getStateInfo ( "ERROR_CREATE_DIR" );
 			return;
@@ -247,16 +247,16 @@ class Uploader {
 			return;
 		}
 		
-		// ÒÆ¶¯ÎÄ¼ş
-		if (! (file_put_contents ( $this->filePath, $img ) && file_exists ( $this->filePath ))) { // ÒÆ¶¯Ê§°Ü
+		// ç§»åŠ¨æ–‡ä»¶
+		if (! (file_put_contents ( $this->filePath, $img ) && file_exists ( $this->filePath ))) { // ç§»åŠ¨å¤±è´¥
 			$this->stateInfo = $this->getStateInfo ( "ERROR_WRITE_CONTENT" );
-		} else { // ÒÆ¶¯³É¹¦
+		} else { // ç§»åŠ¨æˆåŠŸ
 			$this->stateInfo = $this->stateMap [0];
 		}
 	}
 	
 	/**
-	 * ÉÏ´«´íÎó¼ì²é
+	 * ä¸Šä¼ é”™è¯¯æ£€æŸ¥
 	 *
 	 * @param
 	 *        	$errCode
@@ -267,7 +267,7 @@ class Uploader {
 	}
 	
 	/**
-	 * »ñÈ¡ÎÄ¼şÀ©Õ¹Ãû
+	 * è·å–æ–‡ä»¶æ‰©å±•å
 	 *
 	 * @return string
 	 */
@@ -276,12 +276,12 @@ class Uploader {
 	}
 	
 	/**
-	 * ÖØÃüÃûÎÄ¼ş
+	 * é‡å‘½åæ–‡ä»¶
 	 *
 	 * @return string
 	 */
 	private function getFullName() {
-		// Ìæ»»ÈÕÆÚÊÂ¼ş
+		// æ›¿æ¢æ—¥æœŸäº‹ä»¶
 		$t = time ();
 		$d = explode ( '-', date ( "Y-y-m-d-H-i-s" ) );
 		$format = $this->config ["pathFormat"];
@@ -294,12 +294,12 @@ class Uploader {
 		$format = str_replace ( "{ss}", $d [6], $format );
 		$format = str_replace ( "{time}", $t, $format );
 		
-		// ¹ıÂËÎÄ¼şÃûµÄ·Ç·¨×Ô¸º,²¢Ìæ»»ÎÄ¼şÃû
+		// è¿‡æ»¤æ–‡ä»¶åçš„éæ³•è‡ªè´Ÿ,å¹¶æ›¿æ¢æ–‡ä»¶å
 		$oriName = substr ( $this->oriName, 0, strrpos ( $this->oriName, '.' ) );
 		$oriName = preg_replace ( "/[\|\?\"\<\>\/\*\\\\]+/", '', $oriName );
 		$format = str_replace ( "{filename}", $oriName, $format );
 		
-		// Ìæ»»Ëæ»ú×Ö·û´®
+		// æ›¿æ¢éšæœºå­—ç¬¦ä¸²
 		$randNum = rand ( 1, 10000000000 ) . rand ( 1, 10000000000 );
 		if (preg_match ( "/\{rand\:([\d]*)\}/i", $format, $matches )) {
 			$format = preg_replace ( "/\{rand\:[\d]*\}/i", substr ( $randNum, 0, $matches [1] ), $format );
@@ -310,7 +310,7 @@ class Uploader {
 	}
 	
 	/**
-	 * »ñÈ¡ÎÄ¼şÃû
+	 * è·å–æ–‡ä»¶å
 	 *
 	 * @return string
 	 */
@@ -319,7 +319,7 @@ class Uploader {
 	}
 	
 	/**
-	 * »ñÈ¡ÎÄ¼şÍêÕûÂ·¾¶
+	 * è·å–æ–‡ä»¶å®Œæ•´è·¯å¾„
 	 *
 	 * @return string
 	 */
@@ -335,7 +335,7 @@ class Uploader {
 	}
 	
 	/**
-	 * ÎÄ¼şÀàĞÍ¼ì²â
+	 * æ–‡ä»¶ç±»å‹æ£€æµ‹
 	 *
 	 * @return bool
 	 */
@@ -344,7 +344,7 @@ class Uploader {
 	}
 	
 	/**
-	 * ÎÄ¼ş´óĞ¡¼ì²â
+	 * æ–‡ä»¶å¤§å°æ£€æµ‹
 	 *
 	 * @return bool
 	 */
@@ -353,7 +353,7 @@ class Uploader {
 	}
 	
 	/**
-	 * »ñÈ¡µ±Ç°ÉÏ´«³É¹¦ÎÄ¼şµÄ¸÷ÏîĞÅÏ¢
+	 * è·å–å½“å‰ä¸Šä¼ æˆåŠŸæ–‡ä»¶çš„å„é¡¹ä¿¡æ¯
 	 *
 	 * @return array
 	 */

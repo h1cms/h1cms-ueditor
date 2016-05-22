@@ -1,0 +1,21 @@
+{
+    "name": "h1cms/h1cms-ueditor",
+    "description": "yii2 ueditor plugin",
+    "type": "yii2-extension",
+    "keywords": ["yii2","extension"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Allen",
+            "email": "allen@w4u.cn"
+        }
+    ],
+    "require": {
+        "yiisoft/yii2": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "h1cms\\ueditor\\": ""
+        }
+    }
+}

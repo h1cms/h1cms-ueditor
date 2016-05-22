@@ -15,6 +15,9 @@ class Ueditor extends InputWidget {
 	public $clientOptions = [ ];
 	// Ä¬ÈÏÅäÖÃ
 	protected $_options;
+	
+	public $name = 'ueditor';
+	
 	public function init() {
 		$this->id = $this->hasModel () ? Html::getInputId ( $this->model, $this->attribute ) : $this->id;
 		$this->_options = [ 

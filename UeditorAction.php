@@ -67,7 +67,7 @@ class UeditorAction extends Action {
 				echo htmlspecialchars ( $_GET ["callback"] ) . '(' . $result . ')';
 			} else {
 				echo json_encode ( array (
-						'state' => 'callback参数不合法' 
+						'state' => 'callback params invalid' 
 				) );
 			}
 		} else {
@@ -77,7 +77,7 @@ class UeditorAction extends Action {
 	
 	/**
 	 * 上传
-	 * 
+	 *
 	 * @return string
 	 */
 	protected function actionUpload() {
@@ -123,28 +123,15 @@ class UeditorAction extends Action {
 				$fieldName = $this->config ['fileFieldName'];
 				break;
 		}
-		/* 生成上传实例对象并完成上传 */
 		
-		$up = new Uploader ( $fieldName, $config, $base64 );
-		/**
-		 * 得到上传文件所对应的各个参数,数组结构
-		 * array(
-		 * "state" => "", //上传状态，上传成功时必须返回"SUCCESS"
-		 * "url" => "", //返回的地址
-		 * "title" => "", //新文件名
-		 * "original" => "", //原始文件名
-		 * "type" => "" //文件类型
-		 * "size" => "", //文件大小
-		 * )
-		 */
+		$up = new Uploader( $fieldName, $config, $base64 );
 		
-		/* 返回数据 */
 		return json_encode ( $up->getFileInfo () );
 	}
 	
 	/**
 	 * 获取已上传的文件列表
-	 * 
+	 *
 	 * @return string
 	 */
 	protected function actionList() {
@@ -205,7 +192,7 @@ class UeditorAction extends Action {
 	
 	/**
 	 * 抓取远程图片
-	 * 
+	 *
 	 * @return string
 	 */
 	protected function actionCrawler() {
@@ -247,7 +234,7 @@ class UeditorAction extends Action {
 	
 	/**
 	 * 遍历获取目录下的指定类型的文件
-	 * 
+	 *
 	 * @param
 	 *        	$path
 	 * @param

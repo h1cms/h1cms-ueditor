@@ -43,7 +43,7 @@ return [
     /* 执行上传涂鸦的action名称 */
     "scrawlFieldName"         => "upfile",
     /* 提交的图片表单名称 */
-    "scrawlPathFormat"        => "/ueditor/php/upload/image/{yyyy}{mm}{dd}/{time}{rand:6}",
+    "scrawlPathFormat"        => "/upload/image/{yyyy}{mm}{dd}/{time}{rand:6}",
     /* 上传保存路径,可以自定义保存路径和文件名格式 */
     "scrawlMaxSize"           => 2048000,
     /* 上传大小限制，单位B */
